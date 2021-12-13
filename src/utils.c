@@ -28,6 +28,16 @@ void all_beginning(beginning_t *beginning)
     // beginning->sprite = sfSprite_create();
 }
 
+int keyboard(beginning_t *begin)
+{
+    if (sfKeyboard_isKeyPressed(sfKeyUp) || sfKeyboard_isKeyPressed(sfKeySpace))
+        return (1);
+    if (sfKeyboard_isKeyPressed(sfKeyRight))
+        return (3);
+    if (sfKeyboard_isKeyPressed(sfKeyLeft))
+        return (2);
+}
+
 int my_events(beginning_t *begin)
 {
     sfEvent event;
@@ -37,8 +47,13 @@ int my_events(beginning_t *begin)
             sfRenderWindow_close(begin->window);
         else if (event.type == sfEvtKeyPressed && sfKeyEscape == event.key.code)
             sfRenderWindow_close(begin->window);
-        else if (event.type == sfEvtKeyPressed && sfKeySpace == event.key.code)
-            return (1);
+        // else if (event.type == sfEvtKeyPressed && sfKeySpace == event.key.code)
+        //     return (1);
+        // else if (event.type == sfEvtKeyPressed && sfKeyLeft == event.key.code)
+        //     return (2);
+        // else if (event.type == sfEvtKeyPressed && sfKeyRight == event.key.code)
+        //     return (3);
+
         // else if (event.type == sfEvtMouseButtonPressed && sfMouseLeft == event.key.code)
         //     manage_mouse_click(event.mouseButton, begin);
     }

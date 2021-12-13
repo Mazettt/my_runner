@@ -31,6 +31,7 @@ typedef struct scoreboard_s {
 } scoreboard_t;
 
 typedef struct game_object_s {
+    sfClock *clock;
     sfSprite *sprite;
     sfIntRect rect;
     sfVector2f origin;

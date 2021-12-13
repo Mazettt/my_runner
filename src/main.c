@@ -10,7 +10,6 @@
 
 int main(int ac, char **av)
 {
-    printf("1 = %d\n", 1);
     myrunner();
     return (0);
 }

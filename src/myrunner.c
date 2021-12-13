@@ -14,7 +14,9 @@ void init_objs(beginning_t *begin, game_object_t *obj)
         obj[i].sprite = sfSprite_create();
     init_background(begin, obj);
     init_perso(begin, obj);
-    for (int i = 0; i < NBR_OBJ; ++i) {
+    init_obstacle(begin, obj);
+    init_died_message(begin, obj);
+    for (int i = 0; i < NBR_OBJ - 1; ++i) {
         sfSprite_setTexture(obj[i].sprite, begin->texture, sfFalse);
         sfSprite_setTextureRect(obj[i].sprite, obj[i].rect);
     }
@@ -31,28 +33,54 @@ void init_objs(beginning_t *begin, game_object_t *obj)
 //     return (0);
 // }
 
-void move_perso(beginning_t *begin, game_object_t *obj, sfClock *clock)
+void move_perso(beginning_t *begin, game_object_t *obj)
 {
-    float time = sfClock_getElapsedTime(clock).microseconds;
-    int offset = 3840;
-    int max_value = 3840 + 1700;
+    float time = sfClock_getElapsedTime(obj[3].clock).microseconds;
+    int offset = 5940;
+    int max_value = 5940 + 1600;
 
-    if (my_events(begin) && obj[3].pos.y >= 880)
+    if (keyboard(begin) == 2 && obj[3].pos.x != 50)
+        obj[3].pos.x -= 2;
+    if (keyboard(begin) == 3 && obj[3].pos.x != 1850)
+        obj[3].pos.x += 2;
+    if (keyboard(begin) == 1 && obj[3].pos.y >= 900) {
         obj[3].inc_pos = -2;
+        obj[3].rect.left = 5940 + 1246;
+    }
     obj[3].pos.y += obj[3].inc_pos;
-    if (obj[3].pos.y <= 700)
+    if (obj[3].pos.y <= 730)
         obj[3].inc_pos = 2;
-    if (obj[3].pos.y >= 900)
+    if (obj[3].pos.y >= 930) {
         obj[3].inc_pos = 0;
-    if (time >= 100000) {
-        obj[3].rect.left += 170;
-        sfClock_restart(clock);
+        if (time >= 100000) {
+            obj[3].rect.left += 178;
+            sfClock_restart(obj[3].clock);
+        }
     }
     if (obj[3].rect.left >= max_value)
         obj[3].rect.left = offset;
     sfSprite_setPosition(obj[3].sprite, obj[3].pos);
-    for (int i = 0; i < NBR_OBJ; ++i)
+    for (int i = 0; i < NBR_OBJ - 1; ++i)
         sfSprite_setTextureRect(obj[i].sprite, obj[i].rect);
+}
+
+int collisions(beginning_t *begin, game_object_t *obj)
+{
+    sfFloatRect panda = sfSprite_getGlobalBounds(obj[3].sprite);
+    sfFloatRect rocher = sfSprite_getGlobalBounds(obj[4].sprite);
+
+    if (sfFloatRect_intersects(&panda, &rocher, NULL)) {
+        for (int i = 0; i < NBR_OBJ - 1; ++i) {
+            obj[i].inc_pos = 0;
+            obj[i].speed = 0;
+        }
+        printf("oui\n");
+        sfSprite_setTexture(obj[5].sprite, begin->texture, sfFalse);
+        sfSprite_setTextureRect(obj[5].sprite, obj[5].rect);
+        return (0);
+    } else
+        return (1);
+        // sfRenderWindow_close(begin->window);
 }
 
 // void my_putpixel(int x, int y, sfUint8 *framebuffer, sfColor color)
@@ -70,12 +98,16 @@ void move_perso(beginning_t *begin, game_object_t *obj, sfClock *clock)
 //     printf("Mouse x=%d y=%d\n", event.x, event.y);
 // }
 
-void big_while(beginning_t *begin, game_object_t *obj, sfClock *clock)
+void big_while(beginning_t *begin, game_object_t *obj)
 {
+    int bol = 1;
+
     sfRenderWindow_clear(begin->window, sfBlack);
     my_clear_framebuffer(begin->framebuffer, sfBlack);
-    parallax(begin, obj, clock);
-    move_perso(begin, obj, clock);
+    bol = collisions(begin, obj);
+    bol ? parallax(begin, obj) : 0;
+    bol ? move_perso(begin, obj) : 0;
+    my_events(begin);
     for (int i = 0; i < NBR_OBJ; ++i)
         sfRenderWindow_drawSprite(begin->window, obj[i].sprite, NULL);
     sfRenderWindow_display(begin->window);
@@ -85,22 +117,25 @@ int myrunner(void)
 {
     beginning_t beginning;
     game_object_t *obj = malloc(sizeof(game_object_t) * NBR_OBJ);
-    sfClock *clock;
-    float time;
+
+    // float time;
     // sfMusic *music = sfMusic_createFromFile("music/toe.ogg");
     // sfMusic_play(music);
 
-    clock = sfClock_create();
+    for (int i = 0; i < NBR_OBJ; ++i)
+        obj[i].clock = sfClock_create();
     all_beginning(&beginning);
     init_objs(&beginning, obj);
     if (!beginning.window)
         return (84);
     while (sfRenderWindow_isOpen(beginning.window))
-        big_while(&beginning, obj, clock);
+        big_while(&beginning, obj);
         // time = sfClock_getElapsedTime(clock).microseconds;
         // seconds = time.microseconds / 1000000.0;
     free(beginning.framebuffer);
     sfRenderWindow_destroy(beginning.window);
+    for (int i = 0; i < NBR_OBJ; ++i)
+        sfClock_destroy(obj[i].clock);
     // sfMusic_destroy(music);
     return (0);
 }

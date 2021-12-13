@@ -10,6 +10,7 @@
 
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
+    #include <SFML/Graphics/Export.h>
     #include <stdlib.h>
     #include <stdio.h>
     #include <math.h>
@@ -21,22 +22,25 @@
 
     #define WIDTH 1920
     #define HEIGHT 1080
-    #define NBR_OBJ 4
+    #define NBR_OBJ 6
 
 int myrunner(void);
 void manage_mouse_click(sfMouseButtonEvent event, beginning_t *begin);
 
 // move
-void parallax(beginning_t *begin, game_object_t *obj, sfClock *clock);
+void parallax(beginning_t *begin, game_object_t *obj);
 
 // init objs
 void init_background(beginning_t *begin, game_object_t *obj);
 void init_perso(beginning_t *begin, game_object_t *obj);
+void init_obstacle(beginning_t *begin, game_object_t *obj);
+void init_died_message(beginning_t *begin, game_object_t *obj);
 
 // utils
 void my_clear_framebuffer(sfUint8 *framebuffer, sfColor color);
 void all_beginning(beginning_t *beginning);
 int my_events(beginning_t *begin);
+int keyboard(beginning_t *begin);
 sfColor my_rgb(sfColor color);
 sfColor my_rgb_fast(sfColor color, int speed);
 
