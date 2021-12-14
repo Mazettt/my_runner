@@ -42,8 +42,8 @@ CSFML_FLAGS	=	-lcsfml-graphics	\
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	make -C lib/my
-	gcc -o $(NAME) $(OBJ) $(FLAGS) $(CSFML_FLAGS)
+	# make -C lib/my
+	gcc -o $(NAME) $(OBJ) $(FLAGS) $(CSFML_FLAGS) -lm
 
 clean:
 	rm -f $(BIN)

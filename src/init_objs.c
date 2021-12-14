@@ -47,10 +47,6 @@ void init_perso(beginning_t *begin, game_object_t *obj)
 
 void init_obstacle(beginning_t *begin, game_object_t *obj)
 {
-    sfVector2f scale;
-
-    scale.x = 0.25;
-    scale.y = 0.25;
     obj[4].rect.top = 154;
     obj[4].rect.left = 5940;
     obj[4].rect.width = 500;
@@ -59,7 +55,6 @@ void init_obstacle(beginning_t *begin, game_object_t *obj)
     obj[4].pos.y = 960;
     obj[4].origin.x = 250;
     obj[4].origin.y = 174;
-    sfSprite_setScale(obj[4].sprite, scale);
     sfSprite_setOrigin(obj[4].sprite, obj[4].origin);
     sfSprite_setPosition(obj[4].sprite, obj[4].pos);
 }
@@ -70,4 +65,52 @@ void init_died_message(beginning_t *begin, game_object_t *obj)
     obj[5].rect.left = 5940;
     obj[5].rect.width = 1920;
     obj[5].rect.height = 1080;
+}
+
+void init_title_screen(beginning_t *begin, game_object_t *obj)
+{
+    obj[6].rect.top = 1080;
+    obj[6].rect.left = 5940;
+    obj[6].rect.width = 1920;
+    obj[6].rect.height = 1080;
+}
+
+void init_text(beginning_t *begin, scoreboard_t *score)
+{
+    score->display_score.pos.x = 175;
+    score->display_score.pos.y = 70;
+    score->display_score.font = sfFont_createFromFile("minecraft_font.ttf");
+    score->display_score.text = sfText_create();
+    sfText_setFont(score->display_score.text, score->display_score.font);
+    sfText_setColor(score->display_score.text, sfWhite);
+    sfText_setCharacterSize(score->display_score.text, 30);
+    sfText_setPosition(score->display_score.text, score->display_score.pos);
+
+    score->highest.pos.x = 195;
+    score->highest.pos.y = 30;
+    score->highest.font = sfFont_createFromFile("minecraft_font.ttf");
+    score->highest.text = sfText_create();
+    sfText_setFont(score->highest.text, score->highest.font);
+    sfText_setColor(score->highest.text, sfWhite);
+    sfText_setCharacterSize(score->highest.text, 30);
+    sfText_setPosition(score->highest.text, score->highest.pos);
+
+    score->legende.pos.x = 30;
+    score->legende.pos.y = 30;
+    score->legende.font = sfFont_createFromFile("minecraft_font.ttf");
+    score->legende.text = sfText_create();
+    sfText_setFont(score->legende.text, score->legende.font);
+    sfText_setColor(score->legende.text, sfWhite);
+    sfText_setCharacterSize(score->legende.text, 30);
+    sfText_setPosition(score->legende.text, score->legende.pos);
+    sfText_setString(score->legende.text, "Highest : \nScore : ");
+
+    score->died_text.pos.x = 1040;
+    score->died_text.pos.y = 329;
+    score->died_text.font = sfFont_createFromFile("minecraft_font.ttf");
+    score->died_text.text = sfText_create();
+    sfText_setFont(score->died_text.text, score->died_text.font);
+    sfText_setColor(score->died_text.text, sfWhite);
+    sfText_setCharacterSize(score->died_text.text, 26);
+    sfText_setPosition(score->died_text.text, score->died_text.pos);
 }

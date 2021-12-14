@@ -22,10 +22,9 @@
 
     #define WIDTH 1920
     #define HEIGHT 1080
-    #define NBR_OBJ 6
+    #define NBR_OBJ 7
 
 int myrunner(void);
-void manage_mouse_click(sfMouseButtonEvent event, beginning_t *begin);
 
 // move
 void parallax(beginning_t *begin, game_object_t *obj);
@@ -35,11 +34,14 @@ void init_background(beginning_t *begin, game_object_t *obj);
 void init_perso(beginning_t *begin, game_object_t *obj);
 void init_obstacle(beginning_t *begin, game_object_t *obj);
 void init_died_message(beginning_t *begin, game_object_t *obj);
+void init_title_screen(beginning_t *begin, game_object_t *obj);
+void init_objs(beginning_t *begin, game_object_t *obj);
+void init_text(beginning_t *begin, scoreboard_t *score);
 
 // utils
 void my_clear_framebuffer(sfUint8 *framebuffer, sfColor color);
 void all_beginning(beginning_t *beginning);
-int my_events(beginning_t *begin);
+int my_events(beginning_t *begin, events_t *all_events, scoreboard_t *score, game_object_t *obj);
 int keyboard(beginning_t *begin);
 sfColor my_rgb(sfColor color);
 sfColor my_rgb_fast(sfColor color, int speed);

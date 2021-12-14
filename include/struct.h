@@ -26,8 +26,22 @@ typedef struct beginning_s {
     sfSprite *sprite;
 } beginning_t;
 
+typedef struct text_s {
+    sfFont *font;
+    sfText *text;
+    sfVector2f pos;
+} text_t;
+
 typedef struct scoreboard_s {
+    text_t display_score;
+    text_t highest;
+    text_t legende;
+    text_t died_text;
+    int title;
+    int died;
     int score;
+    int highest_score;
+    sfClock *clock;
 } scoreboard_t;
 
 typedef struct game_object_s {
@@ -39,5 +53,12 @@ typedef struct game_object_s {
     int inc_pos;
     int speed;
 } game_object_t;
+
+typedef struct events_s {
+    int left;
+    int right;
+    int up;
+    int escape;
+} events_t;
 
 #endif
