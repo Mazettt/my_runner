@@ -32,26 +32,26 @@ void events_key_released(sfEvent event, events_t *all_events)
 }
 
 void respawn(sfEvent event, scoreboard_t *score, beginning_t *begin,
-game_object_t *obj)
+all_objects_t *all_objs)
 {
     if ((event.mouseButton.x > 664 && event.mouseButton.x < 1317) &&
     (event.mouseButton.y > 436 && event.mouseButton.y < 500)) {
-        init_background(begin, obj);
-        init_obstacle(begin, obj);
-        init_perso(begin, obj);
+        init_background(begin, all_objs);
+        init_obstacle(begin, all_objs);
+        init_perso(begin, all_objs);
         score->died = 0;
     } else if ((event.mouseButton.x > 664 && event.mouseButton.x < 1317) &&
     (event.mouseButton.y > 514 && event.mouseButton.y < 579)) {
-        init_background(begin, obj);
-        init_obstacle(begin, obj);
-        init_perso(begin, obj);
+        init_background(begin, all_objs);
+        init_obstacle(begin, all_objs);
+        init_perso(begin, all_objs);
         score->title = 1;
     }
     score->score = 0;
 }
 
 void menu(sfEvent event, scoreboard_t *score, beginning_t *begin,
-game_object_t *obj)
+all_objects_t *all_objs)
 {
     if (sfMouseLeft == event.key.code)
         if ((event.mouseButton.x > 664 && event.mouseButton.x < 1316) &&
@@ -63,7 +63,7 @@ game_object_t *obj)
         (event.mouseButton.y > 660 && event.mouseButton.y < 724))
             sfRenderWindow_close(begin->window);
         if (score->died)
-            respawn(event, score, begin, obj);
+            respawn(event, score, begin, all_objs);
 }
 
 void mouse_passed(sfEvent event, events_t *events, scoreboard_t *score)
@@ -98,7 +98,7 @@ void mouse_passed(sfEvent event, events_t *events, scoreboard_t *score)
 }
 
 int my_events(beginning_t *begin, events_t *all_events, scoreboard_t *score,
-game_object_t *obj)
+all_objects_t *all_objs)
 {
     sfEvent event;
 
@@ -110,7 +110,7 @@ game_object_t *obj)
         else if (event.type == sfEvtKeyReleased)
             events_key_released(event, all_events);
         else if (event.type == sfEvtMouseButtonPressed)
-            menu(event, score, begin, obj);
+            menu(event, score, begin, all_objs);
         // else if (event.type == sfEvtMouseMoved)
         //     mouse_passed(event, all_events, score);
     }

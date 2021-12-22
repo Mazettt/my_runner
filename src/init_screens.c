@@ -8,39 +8,39 @@
 #include "../include/myrunner.h"
 #include "../include/struct.h"
 
-void init_background(beginning_t *begin, game_object_t *obj)
+void init_background(beginning_t *begin, all_objects_t *all_objs)
 {
-    obj[0].rect.top = 0;
-    obj[0].rect.left = 0;
-    obj[0].rect.width = 1980;
-    obj[0].rect.height = 1080;
-    obj[0].speed = 1;
-    obj[1].rect.top = 1080;
-    obj[1].rect.left = 0;
-    obj[1].rect.width = 1980;
-    obj[1].rect.height = 1080;
-    obj[1].speed = 2;
-    obj[2].rect.top = 1080 * 2;
-    obj[2].rect.left = 0;
-    obj[2].rect.width = 1980;
-    obj[2].rect.height = 1080;
-    obj[2].speed = 3;
+    all_objs->background[0].rect.top = 0;
+    all_objs->background[0].rect.left = 0;
+    all_objs->background[0].rect.width = 1980;
+    all_objs->background[0].rect.height = 1080;
+    all_objs->background[0].speed = 1;
+    all_objs->background[1].rect.top = 1080;
+    all_objs->background[1].rect.left = 0;
+    all_objs->background[1].rect.width = 1980;
+    all_objs->background[1].rect.height = 1080;
+    all_objs->background[1].speed = 2;
+    all_objs->background[2].rect.top = 1080 * 2;
+    all_objs->background[2].rect.left = 0;
+    all_objs->background[2].rect.width = 1980;
+    all_objs->background[2].rect.height = 1080;
+    all_objs->background[2].speed = 3;
 }
 
-void init_died_message(beginning_t *begin, game_object_t *obj)
+void init_died_message(beginning_t *begin, all_objects_t *all_objs)
 {
-    obj[5].rect.top = 2160;
-    obj[5].rect.left = 5940;
-    obj[5].rect.width = 1920;
-    obj[5].rect.height = 1080;
+    all_objs->screens[0].rect.top = 2160;
+    all_objs->screens[0].rect.left = 5940;
+    all_objs->screens[0].rect.width = 1920;
+    all_objs->screens[0].rect.height = 1080;
 }
 
-void init_title_screen(beginning_t *begin, game_object_t *obj)
+void init_title_screen(beginning_t *begin, all_objects_t *all_objs)
 {
-    obj[6].rect.top = 1080;
-    obj[6].rect.left = 5940;
-    obj[6].rect.width = 1920;
-    obj[6].rect.height = 1080;
+    all_objs->screens[1].rect.top = 1080;
+    all_objs->screens[1].rect.left = 5940;
+    all_objs->screens[1].rect.width = 1920;
+    all_objs->screens[1].rect.height = 1080;
 }
 
 // void init_highlight_singleplayer(beginning_t *begin, game_object_t *obj)

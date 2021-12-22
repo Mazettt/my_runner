@@ -8,47 +8,57 @@
 #include "../include/myrunner.h"
 #include "../include/struct.h"
 
-void move_perso(beginning_t *begin, game_object_t *obj, events_t *events)
+void move_perso(beginning_t *begin, all_objects_t *all_objs, events_t *events)
 {
-    float time = sfClock_getElapsedTime(obj[3].clock).microseconds;
+    float time = sfClock_getElapsedTime(all_objs->perso.clock).microseconds;
     int offset = 5940;
     int max_value = 5940 + 1600;
 
-    if (events->left && obj[3].pos.x != 50)
-        obj[3].pos.x -= 2;
-    if (events->right && obj[3].pos.x != 1850)
-        obj[3].pos.x += 2;
-    if (events->up && obj[3].pos.y >= 900) {
-        obj[3].inc_pos = -2;
-        obj[3].rect.left = 5940 + 1246;
+    if (events->left && all_objs->perso.pos.x != 50)
+        all_objs->perso.pos.x -= 2;
+    if (events->right && all_objs->perso.pos.x != 1850)
+        all_objs->perso.pos.x += 2;
+    if (events->up && all_objs->perso.pos.y >= 900) {
+        all_objs->perso.inc_pos = -2;
+        all_objs->perso.rect.left = 5940 + 1246;
     }
-    obj[3].pos.y += obj[3].inc_pos;
-    if (obj[3].pos.y <= 730)
-        obj[3].inc_pos = 2;
-    if (obj[3].pos.y >= 930) {
-        obj[3].inc_pos = 0;
+    all_objs->perso.pos.y += all_objs->perso.inc_pos;
+    if (all_objs->perso.pos.y <= 730)
+        all_objs->perso.inc_pos = 2;
+    if (all_objs->perso.pos.y >= 930) {
+        all_objs->perso.inc_pos = 0;
         if (time >= 100000) {
-            obj[3].rect.left += 178;
-            sfClock_restart(obj[3].clock);
+            all_objs->perso.rect.left += 178;
+            sfClock_restart(all_objs->perso.clock);
         }
     }
-    if (obj[3].rect.left >= max_value)
-        obj[3].rect.left = offset;
-    sfSprite_setPosition(obj[3].sprite, obj[3].pos);
-    for (int i = 0; i < NBR_OBJ; ++i) {
-        sfSprite_setTexture(obj[i].sprite, begin->texture, sfFalse);
-        sfSprite_setTextureRect(obj[i].sprite, obj[i].rect);
+    if (all_objs->perso.rect.left >= max_value)
+        all_objs->perso.rect.left = offset;
+    sfSprite_setPosition(all_objs->perso.sprite, all_objs->perso.pos);
+    for (int i = 0; i < NBR_BACKGROUND; ++i) {
+        sfSprite_setTexture(all_objs->background[i].sprite, begin->texture, sfFalse);
+        sfSprite_setTextureRect(all_objs->background[i].sprite, all_objs->background[i].rect);
     }
+    for (int i = 0; i < NBR_SCREENS; ++i) {
+        sfSprite_setTexture(all_objs->screens[i].sprite, begin->texture, sfFalse);
+        sfSprite_setTextureRect(all_objs->screens[i].sprite, all_objs->screens[i].rect);
+    }
+    for (int i = 0; i < NBR_OBSTACLES; ++i) {
+        sfSprite_setTexture(all_objs->obstacles[i].sprite, begin->texture, sfFalse);
+        sfSprite_setTextureRect(all_objs->obstacles[i].sprite, all_objs->obstacles[i].rect);
+    }
+    sfSprite_setTexture(all_objs->perso.sprite, begin->texture, sfFalse);
+    sfSprite_setTextureRect(all_objs->perso.sprite, all_objs->perso.rect);
 }
 
-int collisions(beginning_t *begin, game_object_t *obj, scoreboard_t *score)
+int collisions(beginning_t *begin, all_objects_t *all_objs, scoreboard_t *score)
 {
-    sfFloatRect panda = sfSprite_getGlobalBounds(obj[3].sprite);
-    sfFloatRect rocher = sfSprite_getGlobalBounds(obj[4].sprite);
+    sfFloatRect panda = sfSprite_getGlobalBounds(all_objs->perso.sprite);
+    sfFloatRect rocher = sfSprite_getGlobalBounds(all_objs->obstacles[0].sprite);
 
     if (sfFloatRect_intersects(&panda, &rocher, NULL)) {
-        sfSprite_setTexture(obj[5].sprite, begin->texture, sfFalse);
-        sfSprite_setTextureRect(obj[5].sprite, obj[5].rect);
+        sfSprite_setTexture(all_objs->screens[0].sprite, begin->texture, sfFalse);
+        sfSprite_setTextureRect(all_objs->screens[0].sprite, all_objs->screens[0].rect);
         if (score->score > score->highest_score)
             score->highest_score = score->score;
         return (1);
@@ -56,45 +66,41 @@ int collisions(beginning_t *begin, game_object_t *obj, scoreboard_t *score)
         return (0);
 }
 
-int title_beginning(beginning_t *begin, game_object_t *obj, scoreboard_t *score)
+int title_beginning(beginning_t *begin, all_objects_t *all_objs, scoreboard_t *score)
 {
-    sfSprite_setTexture(obj[6].sprite, begin->texture, sfFalse);
-    sfSprite_setTextureRect(obj[6].sprite, obj[6].rect);
+    sfSprite_setTexture(all_objs->screens[1].sprite, begin->texture, sfFalse);
+    sfSprite_setTextureRect(all_objs->screens[1].sprite, all_objs->screens[1].rect);
 }
 
-void draw_sprites(beginning_t *begin, game_object_t *obj, scoreboard_t *score,
+void draw_sprites(beginning_t *begin, all_objects_t *all_objs, scoreboard_t *score,
 events_t *events)
 {
-    !score->title ? sfRenderWindow_drawSprite(begin->window, obj[0].sprite, NULL) : 0;
-    !score->title ? sfRenderWindow_drawSprite(begin->window, obj[1].sprite, NULL) : 0;
-    !score->title ? sfRenderWindow_drawSprite(begin->window, obj[2].sprite, NULL) : 0;
-    !score->title ? sfRenderWindow_drawSprite(begin->window, obj[3].sprite, NULL) : 0;
-    !score->title ? sfRenderWindow_drawSprite(begin->window, obj[4].sprite, NULL) : 0;
-    score->died ? sfRenderWindow_drawSprite(begin->window, obj[5].sprite, NULL) : 0;
-    score->title ? sfRenderWindow_drawSprite(begin->window, obj[6].sprite, NULL) : 0;
-    // score->title && events->singleplayer ? sfRenderWindow_drawSprite(begin->window, obj[7].sprite, NULL) : 0;
-    // sfRenderWindow_drawSprite(begin->window, obj[7].sprite, NULL);
-    // score->title && events->options ? sfRenderWindow_drawSprite(begin->window, obj[8].sprite, NULL) : 0;
-    // score->title && events->quit_game ? sfRenderWindow_drawSprite(begin->window, obj[9].sprite, NULL) : 0;
+    !score->title ? sfRenderWindow_drawSprite(begin->window, all_objs->background[0].sprite, NULL) : 0;
+    !score->title ? sfRenderWindow_drawSprite(begin->window, all_objs->background[1].sprite, NULL) : 0;
+    !score->title ? sfRenderWindow_drawSprite(begin->window, all_objs->background[2].sprite, NULL) : 0;
+    !score->title ? sfRenderWindow_drawSprite(begin->window, all_objs->perso.sprite, NULL) : 0;
+    !score->title ? sfRenderWindow_drawSprite(begin->window, all_objs->obstacles[0].sprite, NULL) : 0;
+    score->died ? sfRenderWindow_drawSprite(begin->window, all_objs->screens[0].sprite, NULL) : 0;
+    score->title ? sfRenderWindow_drawSprite(begin->window, all_objs->screens[1].sprite, NULL) : 0;
 }
 
-void big_while(beginning_t *begin, game_object_t *obj, events_t *events, scoreboard_t *score)
+void big_while(beginning_t *begin, all_objects_t *all_objs, events_t *events, scoreboard_t *score)
 {
     float time;
 
     sfRenderWindow_clear(begin->window, sfBlack);
     my_clear_framebuffer(begin->framebuffer, sfBlack);
-    my_events(begin, events, score, obj);
-    score->title ? title_beginning(begin, obj, score) : 0;
-    !score->title ? score->died = collisions(begin, obj, score) : 0;
-    !score->died && !score->title ? parallax(begin, obj) : 0;
-    !score->died && !score->title ? move_perso(begin, obj, events) : 0;
+    my_events(begin, events, score, all_objs);
+    score->title ? title_beginning(begin, all_objs, score) : 0;
+    !score->title ? score->died = collisions(begin, all_objs, score) : 0;
+    !score->died && !score->title ? parallax(begin, all_objs) : 0;
+    !score->died && !score->title ? move_perso(begin, all_objs, events) : 0;
     time = sfClock_getElapsedTime(score->clock).microseconds;
     if (!score->title && !score->died && time >= 100000) {
         score->score += 1;
         sfClock_restart(score->clock);
     }
-    draw_sprites(begin, obj, score, events);
+    draw_sprites(begin, all_objs, score, events);
     sfText_setString(score->display_score.text, my_itoa(score->score));
     sfText_setString(score->died_text.text, my_itoa(score->score));
     sfText_setString(score->highest.text, my_itoa(score->highest_score));
@@ -105,10 +111,32 @@ void big_while(beginning_t *begin, game_object_t *obj, events_t *events, scorebo
     sfRenderWindow_display(begin->window);
 }
 
-int myrunner(void)
+void create_clocks(all_objects_t *all_objs)
+{
+    for (int i = 0; i < NBR_BACKGROUND; ++i)
+        all_objs->background[i].clock = sfClock_create();
+    for (int i = 0; i < NBR_SCREENS; ++i)
+        all_objs->screens[i].clock = sfClock_create();
+    for (int i = 0; i < NBR_OBSTACLES; ++i)
+        all_objs->obstacles[i].clock = sfClock_create();
+    all_objs->perso.clock = sfClock_create();
+}
+
+void destroy_clocks(all_objects_t *all_objs)
+{
+    for (int i = 0; i < NBR_BACKGROUND; ++i)
+        sfClock_destroy(all_objs->background[i].clock);
+    for (int i = 0; i < NBR_SCREENS; ++i)
+        sfClock_destroy(all_objs->screens[i].clock);
+    for (int i = 0; i < NBR_OBSTACLES; ++i)
+        sfClock_destroy(all_objs->obstacles[i].clock);
+    sfClock_destroy(all_objs->perso.clock);
+}
+
+int myrunner(bool inf)
 {
     beginning_t beginning;
-    game_object_t *obj = malloc(sizeof(game_object_t) * NBR_OBJ);
+    all_objects_t all_objs;
     events_t events;
     scoreboard_t score;
 
@@ -118,19 +146,17 @@ int myrunner(void)
 
     score.highest_score = get_backup();
     score.clock = sfClock_create();
-    for (int i = 0; i < NBR_OBJ; ++i)
-        obj[i].clock = sfClock_create();
+    create_clocks(&all_objs);
     all_beginning(&beginning);
-    init_all(&beginning, obj, &events, &score);
+    init_all(&beginning, &all_objs, &events, &score);
     if (!beginning.window)
         return (84);
     while (sfRenderWindow_isOpen(beginning.window))
-        big_while(&beginning, obj, &events, &score);
+        big_while(&beginning, &all_objs, &events, &score);
     free(beginning.framebuffer);
     put_backup(score.highest_score);
     sfRenderWindow_destroy(beginning.window);
-    for (int i = 0; i < NBR_OBJ; ++i)
-        sfClock_destroy(obj[i].clock);
+    destroy_clocks(&all_objs);
     sfClock_destroy(score.clock);
     sfMusic_destroy(music);
     return (0);

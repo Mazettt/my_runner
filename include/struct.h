@@ -17,6 +17,13 @@
     #include <fcntl.h>
     #include <unistd.h>
 
+    #define WIDTH 1920
+    #define HEIGHT 1080
+    #define NBR_OBJ 7
+    #define NBR_BACKGROUND 3
+    #define NBR_SCREENS 2
+    #define NBR_OBSTACLES 1
+
 typedef struct beginning_s {
     sfVideoMode mode;
     sfRenderWindow *window;
@@ -54,10 +61,10 @@ typedef struct game_object_s {
 } game_object_t;
 
 typedef struct all_objects_s {
-    game_object_t background[3];
+    game_object_t background[NBR_BACKGROUND]; // 0 = background, 1 = middle, 2 = foreground
+    game_object_t screens[NBR_SCREENS]; // 0 = died message, 1 = title screen
+    game_object_t obstacles [NBR_OBSTACLES]; // 0 = caillou
     game_object_t perso;
-    game_object_t obstacles;
-    game_object_t screens[2];
 } all_objects_t;
 
 typedef struct events_s {

@@ -10,22 +10,22 @@
 
 #define SPEED 2
 
-void parallax(beginning_t *begin, game_object_t *obj)
+void parallax(beginning_t *begin, all_objects_t *all_objs)
 {
     float time;
 
-    for (int i = 0; i < 3; ++i) {
-        time = sfClock_getElapsedTime(obj[i].clock).microseconds;
+    for (int i = 0; i < NBR_BACKGROUND; ++i) {
+        time = sfClock_getElapsedTime(all_objs->background[i].clock).microseconds;
         if (time >= 1000) {
-            obj[i].rect.left += obj[i].speed * SPEED;
-            sfClock_restart(obj[i].clock);
-            i == 2 ? obj[4].pos.x -= obj[2].speed * SPEED : 0;
+            all_objs->background[i].rect.left += all_objs->background[i].speed * SPEED;
+            sfClock_restart(all_objs->background[i].clock);
+            i == 2 ? all_objs->obstacles[0].pos.x -= all_objs->background[2].speed * SPEED : 0;
         }
-        if (obj[i].rect.left >= 3960) {
-            obj[i].rect.left = 0;
+        if (all_objs->background[i].rect.left >= 3960) {
+            all_objs->background[i].rect.left = 0;
         }
-        if (obj[2].rect.left == 1920 || obj[2].rect.left == 1920 * 2 || obj[2].rect.left == 1920 * 3)
-            obj[4].pos.x = 1920;
+        if (all_objs->background[2].rect.left == 1920 || all_objs->background[2].rect.left == 1920 * 2 || all_objs->background[2].rect.left == 1920 * 3)
+            all_objs->obstacles[0].pos.x = 1920;
     }
-    sfSprite_setPosition(obj[4].sprite, obj[4].pos);
+    sfSprite_setPosition(all_objs->obstacles[0].sprite, all_objs->obstacles[0].pos);
 }
