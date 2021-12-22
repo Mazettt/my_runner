@@ -6,11 +6,17 @@
 ##
 
 SRC	=	src/main.c	\
-		src/myrunner.c	\
-		src/utils.c	\
 		src/draw.c	\
+		src/events.c	\
 		src/init_objs.c	\
+		src/init_screens.c	\
+		src/init_structs.c	\
+		src/init_texts.c	\
+		src/my_itoa.c	\
+		src/myrunner.c	\
 		src/parallax.c	\
+		src/utils.c	\
+		src/backup.c	\
 
 # SRC_TESTS	=	tests/tests_advanced.c	\
 # 			tests/tests_convert.c	\
@@ -42,7 +48,7 @@ CSFML_FLAGS	=	-lcsfml-graphics	\
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	# make -C lib/my
+	make -C lib/my
 	gcc -o $(NAME) $(OBJ) $(FLAGS) $(CSFML_FLAGS) -lm
 
 clean:

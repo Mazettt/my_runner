@@ -16,7 +16,6 @@
     #include <sys/stat.h>
     #include <fcntl.h>
     #include <unistd.h>
-// #include "myrunner.h"
 
 typedef struct beginning_s {
     sfVideoMode mode;
@@ -54,11 +53,21 @@ typedef struct game_object_s {
     int speed;
 } game_object_t;
 
+typedef struct all_objects_s {
+    game_object_t background[3];
+    game_object_t perso;
+    game_object_t obstacles;
+    game_object_t screens[2];
+} all_objects_t;
+
 typedef struct events_s {
     int left;
     int right;
     int up;
     int escape;
+    int singleplayer;
+    int options;
+    int quit_game;
 } events_t;
 
 #endif
