@@ -6,17 +6,22 @@
 ##
 
 SRC	=	src/main.c	\
+		src/backup.c	\
+		src/clocks.c	\
+		src/collisions.c	\
 		src/draw.c	\
 		src/events.c	\
-		src/init_objs.c	\
-		src/init_screens.c	\
-		src/init_structs.c	\
-		src/init_texts.c	\
+		src/get_map.c	\
+		src/init/init_objs.c	\
+		src/init/init_screens.c	\
+		src/init/init_structs.c	\
+		src/init/init_texts.c	\
 		src/my_itoa.c	\
 		src/myrunner.c	\
 		src/parallax.c	\
 		src/utils.c	\
-		src/backup.c	\
+		src/move_perso.c	\
+		src/fps.c	\
 
 # SRC_TESTS	=	tests/tests_advanced.c	\
 # 			tests/tests_convert.c	\

@@ -16,13 +16,14 @@
     #include <sys/stat.h>
     #include <fcntl.h>
     #include <unistd.h>
+    #include <stdbool.h>
 
     #define WIDTH 1920
     #define HEIGHT 1080
     #define NBR_OBJ 7
     #define NBR_BACKGROUND 3
     #define NBR_SCREENS 2
-    #define NBR_OBSTACLES 1
+    #define NBR_OBSTACLES 4
 
 typedef struct beginning_s {
     sfVideoMode mode;
@@ -61,10 +62,14 @@ typedef struct game_object_s {
 } game_object_t;
 
 typedef struct all_objects_s {
-    game_object_t background[NBR_BACKGROUND]; // 0 = background, 1 = middle, 2 = foreground
-    game_object_t screens[NBR_SCREENS]; // 0 = died message, 1 = title screen
-    game_object_t obstacles [NBR_OBSTACLES]; // 0 = caillou
+    game_object_t background[NBR_BACKGROUND];
+    game_object_t screens[NBR_SCREENS];
+    game_object_t obstacles [NBR_OBSTACLES];
     game_object_t perso;
+    char *map;
+    int i;
+    bool inf;
+    sfClock *clock;
 } all_objects_t;
 
 typedef struct events_s {
@@ -76,5 +81,15 @@ typedef struct events_s {
     int options;
     int quit_game;
 } events_t;
+
+typedef struct fps_s {
+    text_t fps_display;
+    text_t legende;
+    sfClock *clock;
+    sfClock *display_clock;
+    float time;
+    int fps;
+    int frame_counter;
+} fps_t;
 
 #endif

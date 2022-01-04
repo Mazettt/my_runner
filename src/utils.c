@@ -19,12 +19,11 @@ void all_beginning(beginning_t *beginning)
 {
     sfVideoMode mode = {WIDTH, HEIGHT, 32};
     beginning->mode = mode;
-    beginning->window = sfRenderWindow_create(mode, "Screensaver",
+    beginning->window = sfRenderWindow_create(mode, "My runner",
     sfClose | sfFullscreen, NULL);
     beginning->framebuffer = my_framebuffer_create();
-    beginning->texture = sfTexture_createFromFile("images/spritesheet.png", NULL);
-    if (!beginning->texture)
-        exit(84);
+    beginning->texture = sfTexture_createFromFile("images/spritesheet.png",
+    NULL);
 }
 
 // int keyboard(beginning_t *begin)

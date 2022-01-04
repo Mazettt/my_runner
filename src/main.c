@@ -37,8 +37,10 @@ int main(int ac, char **av)
     if (av[1][0] == '-' && av[1][1] == 'h') {
         help();
         return (0);
-    } else if (av[1][0] == '-' && av[1][1] == 'i')
+    } else if (av[1][0] == '-' && av[1][1] == 'i') {
         inf = true;
-    myrunner(inf);
+        myrunner(inf, "");
+    } else
+        myrunner(inf, av[1]);
     return (0);
 }
