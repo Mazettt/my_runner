@@ -23,7 +23,7 @@
     #define NBR_OBJ 7
     #define NBR_BACKGROUND 3
     #define NBR_SCREENS 2
-    #define NBR_OBSTACLES 4
+    #define NBR_OBSTACLES 8
 
 typedef struct beginning_s {
     sfVideoMode mode;

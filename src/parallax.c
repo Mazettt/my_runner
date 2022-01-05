@@ -12,7 +12,7 @@
 
 void parallax_objs_rand(beginning_t *begin, all_objects_t *all_objs, int i)
 {
-    for (int j = 0; j < NBR_OBSTACLES; ++j) {
+    for (int j = 0; j < NBR_OBSTACLES / 2; ++j) {
         i == 2 ? all_objs->obstacles[j].pos.x -= all_objs->background[2].speed
         * SPEED * all_objs->factor_fps : 0;
         if (all_objs->obstacles[j].pos.x <= -200)
@@ -23,20 +23,28 @@ void parallax_objs_rand(beginning_t *begin, all_objects_t *all_objs, int i)
 void switch_obstacles(all_objects_t *all_objs, int nbr, int i)
 {
     switch (nbr) {
-    case 1:
-        all_objs->obstacles[0].pos.x = 1920;
-        break;
-    case 2:
-        all_objs->obstacles[1].pos.x = 1920;
-        break;
-    case 3:
-        all_objs->obstacles[2].pos.x = 1920;
-        break;
-    case 4:
-        all_objs->obstacles[3].pos.x = 1920;
-        break;
-    default:
-        break;
+        case 1:
+            all_objs->obstacles[0].pos.x <= 0 ?
+            (all_objs->obstacles[0].pos.x = 1920 + 50) :
+            (all_objs->obstacles[4].pos.x = 1920 + 50);
+            break;
+        case 2:
+            all_objs->obstacles[1].pos.x <= 0 ?
+            (all_objs->obstacles[1].pos.x = 1920 + 50) :
+            (all_objs->obstacles[5].pos.x = 1920 + 50); 
+            break;
+        case 3:
+            all_objs->obstacles[2].pos.x <= 0 ?
+            (all_objs->obstacles[2].pos.x = 1920 + 50) :
+            (all_objs->obstacles[6].pos.x = 1920 + 50);
+            break;
+        case 4:
+            all_objs->obstacles[3].pos.x <= 0 ?
+            (all_objs->obstacles[3].pos.x = 1920 + 50) :
+            (all_objs->obstacles[7].pos.x = 1920 + 50);
+            break;
+        default:
+            break;
     }
 }
 

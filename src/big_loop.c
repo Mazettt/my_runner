@@ -27,7 +27,7 @@ scoreboard_t *score, events_t *events)
     all_objs->background[2].sprite, NULL) : 0;
     !score->title ? sfRenderWindow_drawSprite(begin->window,
     all_objs->perso.sprite, NULL) : 0;
-    for (int i = 0; i < NBR_OBSTACLES; ++i)
+    for (int i = 0; i < NBR_OBSTACLES / (all_objs->inf + 1); ++i)
         !score->title ? sfRenderWindow_drawSprite(begin->window,
         all_objs->obstacles[i].sprite, NULL) : 0;
     score->died ? sfRenderWindow_drawSprite(begin->window,

@@ -29,6 +29,7 @@ int myrunner(bool inf, char *filepath)
     all_beginning(&begin);
     init_all(&begin, &all_objs, &events, &score);
     init_text(&begin, &score, &fps);
+    // sfWindow_setFramerateLimit((sfWindow *)begin.window, 144);
     if (!begin.window || !begin.texture || !begin.framebuffer)
         return (84);
     while (sfRenderWindow_isOpen(begin.window))
@@ -37,5 +38,3 @@ int myrunner(bool inf, char *filepath)
     destroy_clocks(&all_objs, &score, &fps);
     return (0);
 }
-
-    // sfWindow_setFramerateLimit((sfWindow *)begin.window, 30);

@@ -29,7 +29,7 @@ sfMusic *set_music(void)
 {
     sfMusic *music = sfMusic_createFromFile("music/back_on_track.ogg");
 
-    sfMusic_setVolume(music, 10);
+    sfMusic_setVolume(music, 0);
     sfMusic_play(music);
     return (music);
 }

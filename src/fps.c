@@ -19,7 +19,6 @@ int get_fps(fps_t *fps)
 void display_fps(fps_t *fps, scoreboard_t *score, beginning_t *begin)
 {
     float time = sfClock_getElapsedTime(fps->display_clock).microseconds;
-    // int fps_int = get_fps(fps);
 
     if (time >= 500000) {
         sfText_setString(fps->fps_display.text, my_itoa(fps->fps));
@@ -32,5 +31,5 @@ void display_fps(fps_t *fps, scoreboard_t *score, beginning_t *begin)
 
 void get_factor(fps_t *fps, all_objects_t *all_objs)
 {
-    all_objs->factor_fps = sqrtf((float)160 / (float)fps->fps);
+    all_objs->factor_fps = sqrtf((float)200 / (float)fps->fps);
 }

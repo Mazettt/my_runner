@@ -90,4 +90,10 @@ void init_obstacle(beginning_t *begin, all_objects_t *all_objs)
     init_second_spike(begin, all_objs, scale);
     init_third_spike(begin, all_objs, scale);
     init_fourth_spike(begin, all_objs, scale);
+    for (int i = 0; i < NBR_OBSTACLES / 2; ++i) {
+        all_objs->obstacles[i + 4].rect = all_objs->obstacles[i].rect;
+        all_objs->obstacles[i + 4].pos = all_objs->obstacles[i].pos;
+        all_objs->obstacles[i + 4].origin = all_objs->obstacles[i].origin;
+        all_objs->obstacles[i + 4].sprite = sfSprite_copy(all_objs->obstacles[i].sprite);
+    }
 }
