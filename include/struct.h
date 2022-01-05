@@ -70,6 +70,7 @@ typedef struct all_objects_s {
     int i;
     bool inf;
     sfClock *clock;
+    float factor_fps;
 } all_objects_t;
 
 typedef struct events_s {

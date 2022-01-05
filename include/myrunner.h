@@ -24,11 +24,14 @@
 int myrunner(bool inf, char *filepath);
 char *my_itoa(int nb);
 void getmap(all_objects_t *all_objs, char *filepath);
-int display_fps(fps_t *fps, scoreboard_t *score, beginning_t *begin);
+int get_fps(fps_t *fps);
+void display_fps(fps_t *fps, scoreboard_t *score, beginning_t *begin);
+void get_factor(fps_t *fps, all_objects_t *all_objs);
 
 // move
 void parallax(beginning_t *begin, all_objects_t *all_objs);
-void move_perso(beginning_t *begin, all_objects_t *all_objs, events_t *events);
+void move_perso(beginning_t *begin, all_objects_t *all_objs, events_t *events,
+fps_t *fps);
 
 // collisions
 int collisions(beginning_t *begin, all_objects_t *all_objs,

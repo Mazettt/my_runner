@@ -30,7 +30,7 @@ void init_scores(beginning_t *begin, scoreboard_t *score)
 void init_highest(beginning_t *begin, scoreboard_t *score)
 {
     score->highest.pos.x = 155;
-    score->highest.pos.y = 27;
+    score->highest.pos.y = 30;
     score->highest.font = sfFont_createFromFile("fonts/JungleAdventurer.otf");
     score->highest.text = sfText_create();
     sfText_setFont(score->highest.text, score->highest.font);

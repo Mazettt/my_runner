@@ -41,36 +41,44 @@ void draw_texts(beginning_t *begin, scoreboard_t *score, fps_t *fps)
     !score->title && score->died ? sfRenderWindow_drawText(begin->window, score->died_text.text, NULL) : 0;
 }
 
-void big_while(beginning_t *begin, all_objects_t *all_objs, events_t *events, scoreboard_t *score, fps_t *fps)
+void increment_score(scoreboard_t *score)
 {
-    float time;
+    float time = sfClock_getElapsedTime(score->clock).microseconds;
 
-    sfRenderWindow_clear(begin->window, sfBlack);
-    my_clear_framebuffer(begin->framebuffer, sfBlack);
-    my_events(begin, events, score, all_objs);
-    score->title ? title_beginning(begin, all_objs, score) : 0;
-    !score->title ? score->died = collisions(begin, all_objs, score) : 0;
-    !score->died && !score->title ? parallax(begin, all_objs) : 0;
-    !score->died && !score->title ? move_perso(begin, all_objs, events) : 0;
-    time = sfClock_getElapsedTime(score->clock).microseconds;
     if (!score->title && !score->died && time >= 100000) {
         score->score += 1;
         sfClock_restart(score->clock);
     }
+}
+
+void big_while(beginning_t *begin, all_objects_t *all_objs, events_t *events,
+scoreboard_t *score, fps_t *fps)
+{
+    sfRenderWindow_clear(begin->window, sfBlack);
+    my_clear_framebuffer(begin->framebuffer, sfBlack);
+    my_events(begin, events, score, all_objs);
+    score->title ? title_beginning(begin, all_objs, score) : 0;
+    get_fps(fps);
+    get_factor(fps, all_objs);
+    !score->title ? score->died = collisions(begin, all_objs, score) : 0;
+    !score->died && !score->title ? parallax(begin, all_objs) : 0;
+    !score->died && !score->title ? move_perso(begin, all_objs, events, fps) : 0;
+    increment_score(score);
     all_objs->i >= 100 ? score->title = 1 : 0;
     draw_sprites(begin, all_objs, score, events);
     draw_texts(begin, score, fps);
+    // printf("score->score = %d\n", score->score);
     sfRenderWindow_display(begin->window);
 }
 
 int myrunner(bool inf, char *filepath)
 {
-    beginning_t beginning;
     all_objects_t all_objs;
-    events_t events;
+    beginning_t beginning;
     scoreboard_t score;
-    sfMusic *music = sfMusic_createFromFile("music/back_on_track.ogg");
+    events_t events;
     fps_t fps;
+    sfMusic *music = sfMusic_createFromFile("music/back_on_track.ogg");
 
     !inf ? getmap(&all_objs, filepath) : 0;
     all_objs.inf = inf;
@@ -79,7 +87,7 @@ int myrunner(bool inf, char *filepath)
     score.highest_score = get_backup();
     create_clocks(&all_objs, &score, &fps);
     all_beginning(&beginning);
-    // sfWindow_setFramerateLimit((sfWindow *)beginning.window, 30);
+    sfWindow_setFramerateLimit((sfWindow *)beginning.window, 30);
     init_all(&beginning, &all_objs, &events, &score);
     init_text(&beginning, &score, &fps);
     if (!beginning.window || !beginning.texture || !beginning.framebuffer)

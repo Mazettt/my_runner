@@ -16,16 +16,23 @@ int get_fps(fps_t *fps)
     return (fps->fps);
 }
 
-int display_fps(fps_t *fps, scoreboard_t *score, beginning_t *begin)
+void display_fps(fps_t *fps, scoreboard_t *score, beginning_t *begin)
 {
     float time = sfClock_getElapsedTime(fps->display_clock).microseconds;
-    int fps_int = get_fps(fps);
+    // int fps_int = get_fps(fps);
 
     if (time >= 500000) {
-        sfText_setString(fps->fps_display.text, my_itoa(fps_int));
+        sfText_setString(fps->fps_display.text, my_itoa(fps->fps));
         sfClock_restart(fps->display_clock);
     }
     !score->title && !score->died ? sfRenderWindow_drawText(begin->window,
     fps->fps_display.text, NULL), sfRenderWindow_drawText(begin->window,
     fps->legende.text, NULL) : 0;
+}
+
+void get_factor(fps_t *fps, all_objects_t *all_objs)
+{
+    all_objs->factor_fps = sqrtf((float)160 / (float)fps->fps);
+    printf("fps    = %d\n", fps->fps);
+    printf("factor = %0.2f\n\n", all_objs->factor_fps);
 }
