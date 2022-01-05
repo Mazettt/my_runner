@@ -8,7 +8,6 @@
 #include "../include/struct.h"
 #include "../include/myrunner.h"
 
-
 sfUint8 *my_framebuffer_create(void)
 {
     sfUint8 *framebuffer = malloc(sizeof(sfUint8) * (WIDTH * HEIGHT * 4));
@@ -26,12 +25,19 @@ void all_beginning(beginning_t *beginning)
     NULL);
 }
 
-// int keyboard(beginning_t *begin)
-// {
-//     if (sfKeyboard_isKeyPressed(sfKeyUp) || sfKeyboard_isKeyPressed(sfKeySpace))
-//         return (1);
-//     if (sfKeyboard_isKeyPressed(sfKeyRight))
-//         return (3);
-//     if (sfKeyboard_isKeyPressed(sfKeyLeft))
-//         return (2);
-// }
+sfMusic *set_music(void)
+{
+    sfMusic *music = sfMusic_createFromFile("music/back_on_track.ogg");
+
+    sfMusic_setVolume(music, 10);
+    sfMusic_play(music);
+    return (music);
+}
+
+void destroy_all(beginning_t *begin, scoreboard_t *score, sfMusic *music)
+{
+    free(begin->framebuffer);
+    sfRenderWindow_destroy(begin->window);
+    sfMusic_destroy(music);
+    put_backup(score->highest_score);
+}

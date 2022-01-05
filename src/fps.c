@@ -33,6 +33,4 @@ void display_fps(fps_t *fps, scoreboard_t *score, beginning_t *begin)
 void get_factor(fps_t *fps, all_objects_t *all_objs)
 {
     all_objs->factor_fps = sqrtf((float)160 / (float)fps->fps);
-    printf("fps    = %d\n", fps->fps);
-    printf("factor = %0.2f\n\n", all_objs->factor_fps);
 }

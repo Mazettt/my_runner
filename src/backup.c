@@ -9,12 +9,23 @@
 #include "../include/struct.h"
 #include "../include/my.h"
 
+int get_nbr_custom(char *buff)
+{
+    int result = 0;
+
+    for (int i = 0; isnum(buff[i]); ++i) {
+        result *= 10;
+        result += (buff[i] - 48);
+    }
+    return (result);
+}
+
 int get_backup(void)
 {
     char buffer[11];
     int fd = open("highest.json", O_RDONLY);
     int r = read(fd, buffer, 11);
-    int nbr = my_getnbr(buffer);
+    int nbr = get_nbr_custom(buffer);
 
     close(fd);
     return (nbr);

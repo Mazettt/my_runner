@@ -24,28 +24,39 @@ void die_song(int test, scoreboard_t *score, sfMusic *music)
     }
 }
 
-int collisions(beginning_t *begin, all_objects_t *all_objs, scoreboard_t *score)
+int check_collision(beginning_t *begin, all_objects_t *all_objs,
+scoreboard_t *score, sfFloatRect *panda_rocher)
 {
-    sfFloatRect panda = sfSprite_getGlobalBounds(all_objs->perso.sprite);
-    sfFloatRect rocher;
     sfMusic *music = sfMusic_createFromFile("music/die.ogg");
     int test = score->died;
 
-    for (int i = 0; i < NBR_OBSTACLES; ++i) {
-        rocher = sfSprite_getGlobalBounds(all_objs->obstacles[i].sprite);
-        if (sfFloatRect_intersects(&panda, &rocher, NULL)) {
-            score->died = 1;
-            die_song(test, score, music);
-            sfSprite_setTexture(all_objs->screens[0].sprite, begin->texture,
-            sfFalse);
-            sfSprite_setTextureRect(all_objs->screens[0].sprite,
-            all_objs->screens[0].rect);
-            if (score->score > score->highest_score)
-                score->highest_score = score->score;
-            sfMusic_destroy(music);
-            return (1);
-        }
+    if (sfFloatRect_intersects(&panda_rocher[0], &panda_rocher[1], NULL)) {
+        score->died = 1;
+        die_song(test, score, music);
+        sfSprite_setTexture(all_objs->screens[0].sprite, begin->texture,
+        sfFalse);
+        sfSprite_setTextureRect(all_objs->screens[0].sprite,
+        all_objs->screens[0].rect);
+        if (score->score > score->highest_score)
+            score->highest_score = score->score;
+        sfMusic_destroy(music);
+        return (1);
     }
     sfMusic_destroy(music);
+    return (0);
+}
+
+int collisions(beginning_t *begin, all_objects_t *all_objs, scoreboard_t *score)
+{
+    sfFloatRect panda_rocher[2];
+    int ret = 0;
+
+    panda_rocher[0] = sfSprite_getGlobalBounds(all_objs->perso.sprite);
+    for (int i = 0; i < NBR_OBSTACLES; ++i) {
+        panda_rocher[1] =
+        sfSprite_getGlobalBounds(all_objs->obstacles[i].sprite);
+        if (check_collision(begin, all_objs, score, panda_rocher) == 1)
+            return (1);
+    }
     return (0);
 }

@@ -7,12 +7,16 @@
 
 SRC	=	src/main.c	\
 		src/backup.c	\
+		src/big_loop.c	\
 		src/clocks.c	\
 		src/collisions.c	\
 		src/draw.c	\
-		src/events.c	\
+		src/events/events.c	\
+		src/events/events_key.c	\
+		src/events/events_mouse.c	\
 		src/get_map.c	\
-		src/init/init_objs.c	\
+		src/init/init_all.c	\
+		src/init/init_obstacles.c	\
 		src/init/init_screens.c	\
 		src/init/init_structs.c	\
 		src/init/init_texts.c	\
@@ -28,6 +32,8 @@ SRC	=	src/main.c	\
 # 			tests/tests_simple.c	\
 
 OBJ	=	$(SRC:.c=.o)
+
+CC	=	gcc -g
 
 NAME	=	my_runner
 
@@ -54,7 +60,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ)
 	make -C lib/my
-	gcc -o $(NAME) $(OBJ) $(FLAGS) $(CSFML_FLAGS) -lm
+	$(CC) -o $(NAME) $(OBJ) $(FLAGS) $(CSFML_FLAGS) -lm
 
 clean:
 	rm -f $(BIN)

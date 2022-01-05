@@ -12,7 +12,8 @@ void init_scores(beginning_t *begin, scoreboard_t *score)
 {
     score->display_score.pos.x = 135;
     score->display_score.pos.y = 60;
-    score->display_score.font = sfFont_createFromFile("fonts/JungleAdventurer.otf");
+    score->display_score.font =
+    sfFont_createFromFile("fonts/JungleAdventurer.otf");
     score->display_score.text = sfText_create();
     sfText_setFont(score->display_score.text, score->display_score.font);
     sfText_setColor(score->display_score.text, sfWhite);
@@ -27,6 +28,7 @@ void init_scores(beginning_t *begin, scoreboard_t *score)
     sfText_setCharacterSize(score->died_text.text, 35);
     sfText_setPosition(score->died_text.text, score->died_text.pos);
 }
+
 void init_highest(beginning_t *begin, scoreboard_t *score)
 {
     score->highest.pos.x = 155;

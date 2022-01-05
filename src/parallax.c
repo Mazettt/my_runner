@@ -13,7 +13,8 @@
 void parallax_objs_rand(beginning_t *begin, all_objects_t *all_objs, int i)
 {
     for (int j = 0; j < NBR_OBSTACLES; ++j) {
-        i == 2 ? all_objs->obstacles[j].pos.x -= all_objs->background[2].speed * SPEED * all_objs->factor_fps : 0;
+        i == 2 ? all_objs->obstacles[j].pos.x -= all_objs->background[2].speed
+        * SPEED * all_objs->factor_fps : 0;
         if (all_objs->obstacles[j].pos.x <= -200)
             all_objs->obstacles[j].pos.x = rand() % 1920 + 1920 * 2;
     }
@@ -51,7 +52,8 @@ void parallax_objs_map(beginning_t *begin, all_objects_t *all_objs, int i)
         sfClock_restart(all_objs->clock);
     }
     for (int j = 0; j < NBR_OBSTACLES; ++j)
-        i == 2 ? all_objs->obstacles[j].pos.x -= all_objs->background[2].speed * SPEED * all_objs->factor_fps : 0;
+        i == 2 ? all_objs->obstacles[j].pos.x -= all_objs->background[2].speed
+        * SPEED * all_objs->factor_fps : 0;
 }
 
 void parallax(beginning_t *begin, all_objects_t *all_objs)
@@ -59,9 +61,11 @@ void parallax(beginning_t *begin, all_objects_t *all_objs)
     float time;
 
     for (int i = 0; i < NBR_BACKGROUND; ++i) {
-        time = sfClock_getElapsedTime(all_objs->background[i].clock).microseconds;
+        time =
+        sfClock_getElapsedTime(all_objs->background[i].clock).microseconds;
         if (time >= 10000) {
-            all_objs->background[i].rect.left += all_objs->background[i].speed * SPEED * all_objs->factor_fps;
+            all_objs->background[i].rect.left += all_objs->background[i].speed
+            * SPEED * all_objs->factor_fps;
             sfClock_restart(all_objs->background[i].clock);
             all_objs->inf ? parallax_objs_rand(begin, all_objs, i) :
             parallax_objs_map(begin, all_objs, i);
@@ -70,5 +74,6 @@ void parallax(beginning_t *begin, all_objects_t *all_objs)
             all_objs->background[i].rect.left = 0;
     }
     for (int j = 0; j < NBR_OBSTACLES; ++j)
-        sfSprite_setPosition(all_objs->obstacles[j].sprite, all_objs->obstacles[j].pos);
+        sfSprite_setPosition(all_objs->obstacles[j].sprite,
+        all_objs->obstacles[j].pos);
 }
