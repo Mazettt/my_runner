@@ -11,21 +11,21 @@
     #include <SFML/Graphics/Export.h>
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
+    #include <sys/stat.h>
+    #include <stdbool.h>
     #include <stdlib.h>
+    #include <unistd.h>
+    #include <fcntl.h>
+    #include <stdio.h>
     #include <stdio.h>
     #include <math.h>
-    #include <stdio.h>
-    #include <sys/stat.h>
-    #include <fcntl.h>
-    #include <unistd.h>
-    #include <stdbool.h>
 
     #define WIDTH 1920
     #define HEIGHT 1080
-    #define NBR_OBJ 7
     #define NBR_BACKGROUND 3
-    #define NBR_SCREENS 3
     #define NBR_OBSTACLES 8
+    #define NBR_SCREENS 3
+    #define NBR_OBJ 7
 
 typedef struct beginning_s {
     sfVideoMode mode;

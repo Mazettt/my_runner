@@ -78,7 +78,8 @@ void big_loop(beginning_t *begin, all_t *all_structs)
     my_events(begin, events, score, all_objs);
     get_factor(fps, all_objs);
     score->title ? title_beginning(begin, all_objs, score) : 0;
-    // !score->title && !score->won ? score->died = collisions(begin, all_objs, score) : 0;
+    !score->title && !score->won ?
+    score->died = collisions(begin, all_objs, score) : 0;
     !score->died && !score->title ? parallax(begin, all_objs) : 0;
     !score->died && !score->title ?
     move_perso(begin, all_objs, events, fps) : 0;
@@ -86,6 +87,5 @@ void big_loop(beginning_t *begin, all_t *all_structs)
     draw_sprites(begin, all_objs, score, events);
     draw_texts(begin, score, fps);
     play_music(all_objs, score, test_died, test_title);
-    printf("all_objs->i = %d\n", all_objs->i);
     sfRenderWindow_display(begin->window);
 }

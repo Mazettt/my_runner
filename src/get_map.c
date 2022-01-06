@@ -20,5 +20,4 @@ void getmap(all_objects_t *all_objs, char *filepath)
     buff[i] = '\0';
     all_objs->map = buff;
     all_objs->size_map = i;
-    printf("all_objs->size_map = %d\n", all_objs->size_map);
 }
