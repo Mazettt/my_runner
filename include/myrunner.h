@@ -22,8 +22,7 @@
     #include "struct.h"
 
 int myrunner(bool inf, char *filepath);
-void big_loop(beginning_t *begin, all_objects_t *all_objs, events_t *events,
-scoreboard_t *score, fps_t *fps);
+void big_loop(beginning_t *begin, all_t *all_structs);
 char *my_itoa(int nb);
 void getmap(all_objects_t *all_objs, char *filepath);
 int get_fps(fps_t *fps);
@@ -66,6 +65,7 @@ void init_score(scoreboard_t *score);
 
 // utils
 void my_clear_framebuffer(sfUint8 *framebuffer, sfColor color);
+void clean_window(beginning_t *begin, sfColor color);
 void all_beginning(beginning_t *beginning);
 sfMusic *set_music(void);
 void destroy_all(beginning_t *begin, scoreboard_t *score, sfMusic *music);

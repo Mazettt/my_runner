@@ -94,6 +94,7 @@ void init_obstacle(beginning_t *begin, all_objects_t *all_objs)
         all_objs->obstacles[i + 4].rect = all_objs->obstacles[i].rect;
         all_objs->obstacles[i + 4].pos = all_objs->obstacles[i].pos;
         all_objs->obstacles[i + 4].origin = all_objs->obstacles[i].origin;
-        all_objs->obstacles[i + 4].sprite = sfSprite_copy(all_objs->obstacles[i].sprite);
+        all_objs->obstacles[i + 4].sprite =
+        sfSprite_copy(all_objs->obstacles[i].sprite);
     }
 }

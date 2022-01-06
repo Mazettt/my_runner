@@ -93,4 +93,11 @@ typedef struct fps_s {
     int frame_counter;
 } fps_t;
 
+typedef struct all_s {
+    all_objects_t all_objs;
+    events_t events;
+    scoreboard_t score;
+    fps_t fps;
+} all_t;
+
 #endif

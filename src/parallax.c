@@ -22,29 +22,25 @@ void parallax_objs_rand(beginning_t *begin, all_objects_t *all_objs, int i)
 
 void switch_obstacles(all_objects_t *all_objs, int nbr, int i)
 {
-    switch (nbr) {
-        case 1:
-            all_objs->obstacles[0].pos.x <= 0 ?
-            (all_objs->obstacles[0].pos.x = 1920 + 50) :
-            (all_objs->obstacles[4].pos.x = 1920 + 50);
-            break;
-        case 2:
-            all_objs->obstacles[1].pos.x <= 0 ?
-            (all_objs->obstacles[1].pos.x = 1920 + 50) :
-            (all_objs->obstacles[5].pos.x = 1920 + 50); 
-            break;
-        case 3:
-            all_objs->obstacles[2].pos.x <= 0 ?
-            (all_objs->obstacles[2].pos.x = 1920 + 50) :
-            (all_objs->obstacles[6].pos.x = 1920 + 50);
-            break;
-        case 4:
-            all_objs->obstacles[3].pos.x <= 0 ?
-            (all_objs->obstacles[3].pos.x = 1920 + 50) :
-            (all_objs->obstacles[7].pos.x = 1920 + 50);
-            break;
-        default:
-            break;
+    if (nbr == 1) {
+        all_objs->obstacles[0].pos.x <= 0 ?
+        (all_objs->obstacles[0].pos.x = 1920 + 50) :
+        (all_objs->obstacles[4].pos.x = 1920 + 50);
+    }
+    if (nbr == 2) {
+        all_objs->obstacles[1].pos.x <= 0 ?
+        (all_objs->obstacles[1].pos.x = 1920 + 50) :
+        (all_objs->obstacles[5].pos.x = 1920 + 50);
+    }
+    if (nbr == 3) {
+        all_objs->obstacles[2].pos.x <= 0 ?
+        (all_objs->obstacles[2].pos.x = 1920 + 50) :
+        (all_objs->obstacles[6].pos.x = 1920 + 50);
+    }
+    if (nbr == 4) {
+        all_objs->obstacles[3].pos.x <= 0 ?
+        (all_objs->obstacles[3].pos.x = 1920 + 50) :
+        (all_objs->obstacles[7].pos.x = 1920 + 50);
     }
 }
 

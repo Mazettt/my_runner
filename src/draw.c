@@ -20,3 +20,9 @@ void my_clear_framebuffer(sfUint8 *framebuffer, sfColor color)
 {
     my_draw_rectangle(framebuffer, WIDTH, HEIGHT, color);
 }
+
+void clean_window(beginning_t *begin, sfColor color)
+{
+    sfRenderWindow_clear(begin->window, color);
+    my_clear_framebuffer(begin->framebuffer, color);
+}

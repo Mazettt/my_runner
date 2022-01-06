@@ -62,14 +62,16 @@ void increment_score(scoreboard_t *score)
     }
 }
 
-void big_loop(beginning_t *begin, all_objects_t *all_objs, events_t *events,
-scoreboard_t *score, fps_t *fps)
+void big_loop(beginning_t *begin, all_t *all_structs)
 {
-    sfRenderWindow_clear(begin->window, sfBlack);
-    my_clear_framebuffer(begin->framebuffer, sfBlack);
+    events_t *events = &all_structs->events;
+    scoreboard_t *score = &all_structs->score;
+    all_objects_t *all_objs = &all_structs->all_objs;
+    fps_t *fps = &all_structs->fps;
+
+    clean_window(begin, sfBlack);
     my_events(begin, events, score, all_objs);
     score->title ? title_beginning(begin, all_objs, score) : 0;
-    get_fps(fps);
     get_factor(fps, all_objs);
     !score->title ? score->died = collisions(begin, all_objs, score) : 0;
     !score->died && !score->title ? parallax(begin, all_objs) : 0;

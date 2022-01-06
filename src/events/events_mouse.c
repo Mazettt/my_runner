@@ -44,25 +44,3 @@ all_objects_t *all_objs)
         if (score->died)
             respawn(event, score, begin, all_objs);
 }
-
-// void mouse_passed(sfEvent event, events_t *events, scoreboard_t *score)
-// {
-//     if (score->title &&
-//     (event.mouseMove.x > 664 && event.mouseMove.x < 1316) &&
-//     (event.mouseMove.y > 404 && event.mouseMove.y < 468)) {
-//         events->singleplayer = 1;
-//     } else if (score->title &&
-//     (event.mouseMove.x < 664 || event.mouseMove.x > 1316) &&
-//     (event.mouseMove.y < 404 || event.mouseMove.y > 468)) {
-//         events->singleplayer = 0;
-//     }
-//     if (score->title &&
-//     (event.mouseMove.x > 998 && event.mouseMove.x < 1316) &&
-//     (event.mouseMove.y > 660 && event.mouseMove.y < 724)) {
-//         events->quit_game = 1;
-//     } else if (score->title &&
-//     (event.mouseMove.x < 998 || event.mouseMove.x > 1316) &&
-//     (event.mouseMove.y < 660 || event.mouseMove.y > 724)) {
-//         events->quit_game = 0;
-//     }
-// }
