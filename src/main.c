@@ -18,9 +18,15 @@ void help(void)
     my_putstr("    -h print the usage and quit.\n\n");
     my_putstr("USER INTERACTIONS\n");
     my_putstr("    Up arrow / space    Jump\n");
-    my_putstr("    Right arrow         Move right\n");
-    my_putstr("    Left arrow          Move left\n");
+    my_putstr("    Left arrow / Q      Move left\n");
+    my_putstr("    Right arrow / D     Move right\n");
     my_putstr("    Escape              Pause game\n");
+    my_putstr("MAP\n");
+    my_putstr("    1: Obstacle number 1\n");
+    my_putstr("    2: Obstacle number 2\n");
+    my_putstr("    3: Obstacle number 3\n");
+    my_putstr("    4: Obstacle number 4\n");
+    my_putstr("    0: end of map.\n");
 }
 
 int main(int ac, char **av)
