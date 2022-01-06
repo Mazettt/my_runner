@@ -67,8 +67,14 @@ void init_score(scoreboard_t *score);
 void my_clear_framebuffer(sfUint8 *framebuffer, sfColor color);
 void clean_window(beginning_t *begin, sfColor color);
 void all_beginning(beginning_t *beginning);
-sfMusic *set_music(void);
-void destroy_all(beginning_t *begin, scoreboard_t *score, sfMusic *music);
+void destroy_all(beginning_t *begin, scoreboard_t *score,
+all_objects_t *all_objs);
+
+// music
+void play_music(all_objects_t *all_objs, scoreboard_t *score, bool test_died,
+bool test_title);
+sfMusic *set_music(char *filepath);
+void play_jump_sound(all_objects_t *all_objs);
 
 // events
 void my_events(beginning_t *begin, events_t *all_events, scoreboard_t *score,

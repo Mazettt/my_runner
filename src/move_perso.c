@@ -59,6 +59,7 @@ fps_t *fps)
         all_objs->perso.inc_pos = -3 * all_objs->factor_fps *
         sqrt(all_objs->factor_fps);
         all_objs->perso.rect.left = 5940 + 1246;
+        sfMusic_play(all_objs->jump_music);
     }
 }
 
@@ -78,4 +79,5 @@ fps_t *fps)
         all_objs->perso.rect.left = 5940;
     sfSprite_setPosition(all_objs->perso.sprite, all_objs->perso.pos);
     set_all_textures(begin, all_objs, events);
+    play_jump_sound(all_objs);
 }

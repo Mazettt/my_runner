@@ -8,7 +8,9 @@
 #ifndef STRUCT_H_
     #define STRUCT_H_
 
+    #include <SFML/Graphics/Export.h>
     #include <SFML/Graphics.h>
+    #include <SFML/Audio.h>
     #include <stdlib.h>
     #include <stdio.h>
     #include <math.h>
@@ -69,8 +71,10 @@ typedef struct all_objects_s {
     char *map;
     int i;
     bool inf;
-    sfClock *clock;
     float factor_fps;
+    sfClock *clock;
+    sfMusic *music;
+    sfMusic *jump_music;
 } all_objects_t;
 
 typedef struct events_s {

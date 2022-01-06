@@ -25,19 +25,12 @@ void all_beginning(beginning_t *beginning)
     NULL);
 }
 
-sfMusic *set_music(void)
-{
-    sfMusic *music = sfMusic_createFromFile("music/back_on_track.ogg");
-
-    sfMusic_setVolume(music, 0);
-    sfMusic_play(music);
-    return (music);
-}
-
-void destroy_all(beginning_t *begin, scoreboard_t *score, sfMusic *music)
+void destroy_all(beginning_t *begin, scoreboard_t *score,
+all_objects_t *all_objs)
 {
     free(begin->framebuffer);
     sfRenderWindow_destroy(begin->window);
-    sfMusic_destroy(music);
+    sfMusic_destroy(all_objs->music);
+    sfMusic_destroy(all_objs->jump_music);
     put_backup(score->highest_score);
 }

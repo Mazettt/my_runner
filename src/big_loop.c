@@ -52,7 +52,7 @@ void draw_texts(beginning_t *begin, scoreboard_t *score, fps_t *fps)
     score->died_text.text, NULL) : 0;
 }
 
-void increment_score(scoreboard_t *score)
+void increment_score(scoreboard_t *score, all_objects_t *all_objs)
 {
     float time = sfClock_getElapsedTime(score->clock).microseconds;
 
@@ -60,6 +60,7 @@ void increment_score(scoreboard_t *score)
         score->score += 1;
         sfClock_restart(score->clock);
     }
+    all_objs->i >= 100 ? score->title = 1 : 0;
 }
 
 void big_loop(beginning_t *begin, all_t *all_structs)
@@ -68,18 +69,20 @@ void big_loop(beginning_t *begin, all_t *all_structs)
     scoreboard_t *score = &all_structs->score;
     all_objects_t *all_objs = &all_structs->all_objs;
     fps_t *fps = &all_structs->fps;
+    bool test_title = (score->title == 1) ? true : false;
+    bool test_died = (score->died == 1) ? true : false;
 
     clean_window(begin, sfBlack);
     my_events(begin, events, score, all_objs);
-    score->title ? title_beginning(begin, all_objs, score) : 0;
     get_factor(fps, all_objs);
+    score->title ? title_beginning(begin, all_objs, score) : 0;
     !score->title ? score->died = collisions(begin, all_objs, score) : 0;
     !score->died && !score->title ? parallax(begin, all_objs) : 0;
     !score->died && !score->title ?
     move_perso(begin, all_objs, events, fps) : 0;
-    increment_score(score);
-    all_objs->i >= 100 ? score->title = 1 : 0;
+    increment_score(score, all_objs);
     draw_sprites(begin, all_objs, score, events);
     draw_texts(begin, score, fps);
+    play_music(all_objs, score, test_died, test_title);
     sfRenderWindow_display(begin->window);
 }

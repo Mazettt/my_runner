@@ -10,7 +10,7 @@ SRC	=	src/main.c	\
 		src/big_loop.c	\
 		src/clocks.c	\
 		src/collisions.c	\
-		src/draw.c	\
+		src/clean_window.c	\
 		src/events/events.c	\
 		src/events/events_key.c	\
 		src/events/events_mouse.c	\
@@ -26,6 +26,7 @@ SRC	=	src/main.c	\
 		src/utils.c	\
 		src/move_perso.c	\
 		src/fps.c	\
+		src/music.c	\
 
 # SRC_TESTS	=	tests/tests_advanced.c	\
 # 			tests/tests_convert.c	\

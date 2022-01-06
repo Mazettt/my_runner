@@ -19,7 +19,8 @@ int myrunner(bool inf, char *filepath)
 {
     all_t all_structs;
     beginning_t begin;
-    sfMusic *music = set_music();
+    all_structs.all_objs.music = set_music("music/Czar_Donic-Bug.ogg");
+    all_structs.all_objs.jump_music = set_music("music/jump.ogg");
 
     infini(inf, &all_structs.all_objs, filepath);
     create_clocks(&all_structs.all_objs, &all_structs.score, &all_structs.fps);
@@ -27,12 +28,12 @@ int myrunner(bool inf, char *filepath)
     init_all(&begin, &all_structs.all_objs, &all_structs.events,
     &all_structs.score);
     init_text(&begin, &all_structs.score, &all_structs.fps);
+    sfWindow_setFramerateLimit((sfWindow *)begin.window, 60);
     if (!begin.window || !begin.texture || !begin.framebuffer)
         return (84);
     while (sfRenderWindow_isOpen(begin.window))
         big_loop(&begin, &all_structs);
-    destroy_all(&begin, &all_structs.score, music);
+    destroy_all(&begin, &all_structs.score, &all_structs.all_objs);
     destroy_clocks(&all_structs.all_objs, &all_structs.score, &all_structs.fps);
     return (0);
 }
-    // sfWindow_setFramerateLimit((sfWindow *)begin.window, 144);

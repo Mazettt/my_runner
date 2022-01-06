@@ -15,7 +15,7 @@ void die_song(int test, scoreboard_t *score, sfMusic *music)
 
     if (test - score->died == -1) {
         clock = sfClock_create();
-        sfMusic_setVolume(music, 30);
+        sfMusic_setVolume(music, 50);
         sfMusic_play(music);
         do {
             time = sfClock_getElapsedTime(clock).microseconds;
