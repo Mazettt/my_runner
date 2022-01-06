@@ -80,8 +80,7 @@ void big_loop(beginning_t *begin, all_t *all_structs)
     score->title ? title_beginning(begin, all_objs, score) : 0;
     !score->title && !score->won ?
     score->died = collisions(begin, all_objs, score) : 0;
-    !score->died && !score->title ? parallax(begin, all_objs) : 0;
-    !score->died && !score->title ?
+    !score->died && !score->title ? parallax(begin, all_objs),
     move_perso(begin, all_objs, events, fps) : 0;
     increment_score(score, all_objs);
     draw_sprites(begin, all_objs, score, events);
