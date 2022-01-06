@@ -55,7 +55,7 @@ fps_t *fps)
     if (events->right && all_objs->perso.pos.x != 1850)
         all_objs->perso.pos.x += 2 * all_objs->factor_fps *
         sqrt(all_objs->factor_fps);
-    if (events->up && all_objs->perso.pos.y >= 900) {
+    if (events->up && all_objs->perso.pos.y >= 899) {
         all_objs->perso.inc_pos = -3 * all_objs->factor_fps *
         sqrt(all_objs->factor_fps);
         all_objs->perso.rect.left = 5940 + 1246;
@@ -67,6 +67,7 @@ void move_perso(beginning_t *begin, all_objects_t *all_objs, events_t *events,
 fps_t *fps)
 {
     movements(begin, all_objs, events, fps);
+    play_jump_sound(all_objs);
     if (!events->up && all_objs->perso.pos.y < 900)
         all_objs->perso.inc_pos = 3 * all_objs->factor_fps *
         sqrt(all_objs->factor_fps);
@@ -79,5 +80,4 @@ fps_t *fps)
         all_objs->perso.rect.left = 5940;
     sfSprite_setPosition(all_objs->perso.sprite, all_objs->perso.pos);
     set_all_textures(begin, all_objs, events);
-    play_jump_sound(all_objs);
 }

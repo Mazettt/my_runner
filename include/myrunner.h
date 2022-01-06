@@ -52,9 +52,7 @@ void init_obstacle(beginning_t *begin, all_objects_t *all_objs);
 void init_background(beginning_t *begin, all_objects_t *all_objs);
 void init_died_message(beginning_t *begin, all_objects_t *all_objs);
 void init_title_screen(beginning_t *begin, all_objects_t *all_objs);
-void init_highlight_singleplayer(beginning_t *begin, game_object_t *obj);
-void init_highlight_options(beginning_t *begin, game_object_t *obj);
-void init_highlight_quit_game(beginning_t *begin, game_object_t *obj);
+void init_won_message(beginning_t *begin, all_objects_t *all_objs);
 
 // init text
 void init_text(beginning_t *begin, scoreboard_t *score, fps_t *fps);

@@ -29,6 +29,26 @@ all_objects_t *all_objs)
     score->score = 0;
 }
 
+void restart(sfEvent event, scoreboard_t *score, beginning_t *begin,
+all_objects_t *all_objs)
+{
+    if ((event.mouseButton.x > 664 && event.mouseButton.x < 1317) &&
+    (event.mouseButton.y > 436 && event.mouseButton.y < 500)) {
+        init_perso(begin, all_objs);
+        init_background(begin, all_objs);
+        init_obstacle(begin, all_objs);
+        score->won = 0;
+        all_objs->i = 0;
+    } else if ((event.mouseButton.x > 664 && event.mouseButton.x < 1317) &&
+    (event.mouseButton.y > 514 && event.mouseButton.y < 579)) {
+        init_background(begin, all_objs);
+        init_obstacle(begin, all_objs);
+        init_perso(begin, all_objs);
+        score->title = 1;
+    }
+    score->score = 0;
+}
+
 void menu(sfEvent event, scoreboard_t *score, beginning_t *begin,
 all_objects_t *all_objs)
 {
@@ -43,4 +63,6 @@ all_objects_t *all_objs)
             sfRenderWindow_close(begin->window);
         if (score->died)
             respawn(event, score, begin, all_objs);
+        else if (score->won)
+            restart(event, score, begin, all_objs);
 }

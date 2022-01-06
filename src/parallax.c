@@ -50,10 +50,10 @@ void parallax_objs_map(beginning_t *begin, all_objects_t *all_objs, int i)
 
     if (i != 2)
         return;
-    if (time >= 150000) {
+    if (time >= 120000) {
         switch_obstacles(all_objs, all_objs->map[all_objs->i] - 48, i);
-        ++all_objs->i;
         sfClock_restart(all_objs->clock);
+        ++all_objs->i;
     }
     for (int j = 0; j < NBR_OBSTACLES; ++j)
         i == 2 ? all_objs->obstacles[j].pos.x -= all_objs->background[2].speed

@@ -28,10 +28,12 @@ scoreboard_t *score, events_t *events)
     !score->title ? sfRenderWindow_drawSprite(begin->window,
     all_objs->perso.sprite, NULL) : 0;
     for (int i = 0; i < NBR_OBSTACLES / (all_objs->inf + 1); ++i)
-        !score->title ? sfRenderWindow_drawSprite(begin->window,
+        !score->title && !score->won ? sfRenderWindow_drawSprite(begin->window,
         all_objs->obstacles[i].sprite, NULL) : 0;
     score->died ? sfRenderWindow_drawSprite(begin->window,
     all_objs->screens[0].sprite, NULL) : 0;
+    score->won ? sfRenderWindow_drawSprite(begin->window,
+    all_objs->screens[2].sprite, NULL) : 0;
     score->title ? sfRenderWindow_drawSprite(begin->window,
     all_objs->screens[1].sprite, NULL) : 0;
 }
@@ -56,11 +58,11 @@ void increment_score(scoreboard_t *score, all_objects_t *all_objs)
 {
     float time = sfClock_getElapsedTime(score->clock).microseconds;
 
-    if (!score->title && !score->died && time >= 100000) {
+    if (!score->title && !score->died && !score->won && time >= 100000) {
         score->score += 1;
         sfClock_restart(score->clock);
     }
-    all_objs->i >= 100 ? score->title = 1 : 0;
+    all_objs->i >= all_objs->size_map + 20 ? score->won = 1 : 0;
 }
 
 void big_loop(beginning_t *begin, all_t *all_structs)
@@ -76,7 +78,7 @@ void big_loop(beginning_t *begin, all_t *all_structs)
     my_events(begin, events, score, all_objs);
     get_factor(fps, all_objs);
     score->title ? title_beginning(begin, all_objs, score) : 0;
-    !score->title ? score->died = collisions(begin, all_objs, score) : 0;
+    // !score->title && !score->won ? score->died = collisions(begin, all_objs, score) : 0;
     !score->died && !score->title ? parallax(begin, all_objs) : 0;
     !score->died && !score->title ?
     move_perso(begin, all_objs, events, fps) : 0;
@@ -84,5 +86,6 @@ void big_loop(beginning_t *begin, all_t *all_structs)
     draw_sprites(begin, all_objs, score, events);
     draw_texts(begin, score, fps);
     play_music(all_objs, score, test_died, test_title);
+    printf("all_objs->i = %d\n", all_objs->i);
     sfRenderWindow_display(begin->window);
 }

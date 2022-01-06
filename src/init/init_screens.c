@@ -42,3 +42,11 @@ void init_title_screen(beginning_t *begin, all_objects_t *all_objs)
     all_objs->screens[1].rect.width = 1920;
     all_objs->screens[1].rect.height = 1080;
 }
+
+void init_won_message(beginning_t *begin, all_objects_t *all_objs)
+{
+    all_objs->screens[2].rect.top = 2160;
+    all_objs->screens[2].rect.left = 7920;
+    all_objs->screens[2].rect.width = 1920;
+    all_objs->screens[2].rect.height = 1080;
+}

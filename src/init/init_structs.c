@@ -24,4 +24,5 @@ void init_score(scoreboard_t *score)
     score->score = 0;
     score->title = 1;
     score->died = 0;
+    score->won = 0;
 }

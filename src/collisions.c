@@ -52,9 +52,17 @@ int collisions(beginning_t *begin, all_objects_t *all_objs, scoreboard_t *score)
     int ret = 0;
 
     panda_rocher[0] = sfSprite_getGlobalBounds(all_objs->perso.sprite);
+    panda_rocher[0].top -= 10;
+    panda_rocher[0].left -= 10;
+    panda_rocher[0].height -= 10;
+    panda_rocher[0].width -= 10;
     for (int i = 0; i < NBR_OBSTACLES; ++i) {
         panda_rocher[1] =
         sfSprite_getGlobalBounds(all_objs->obstacles[i].sprite);
+        panda_rocher[1].top -= 10;
+        panda_rocher[1].left -= 10;
+        panda_rocher[1].height -= 10;
+        panda_rocher[1].width -= 10;
         if (check_collision(begin, all_objs, score, panda_rocher) == 1)
             return (1);
     }

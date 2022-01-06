@@ -24,7 +24,7 @@
     #define HEIGHT 1080
     #define NBR_OBJ 7
     #define NBR_BACKGROUND 3
-    #define NBR_SCREENS 2
+    #define NBR_SCREENS 3
     #define NBR_OBSTACLES 8
 
 typedef struct beginning_s {
@@ -48,6 +48,7 @@ typedef struct scoreboard_s {
     text_t died_text;
     int title;
     int died;
+    int won;
     int score;
     int highest_score;
     sfClock *clock;
@@ -69,6 +70,7 @@ typedef struct all_objects_s {
     game_object_t obstacles [NBR_OBSTACLES];
     game_object_t perso;
     char *map;
+    int size_map;
     int i;
     bool inf;
     float factor_fps;

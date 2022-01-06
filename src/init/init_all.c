@@ -62,6 +62,7 @@ scoreboard_t *score)
     init_score(score);
     init_background(begin, all_objs);
     init_died_message(begin, all_objs);
+    init_won_message(begin, all_objs);
     init_title_screen(begin, all_objs);
     init_perso(begin, all_objs);
     init_obstacle(begin, all_objs);
