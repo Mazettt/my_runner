@@ -49,13 +49,13 @@ void change_animation(beginning_t *begin, all_objects_t *all_objs)
 void movements(beginning_t *begin, all_objects_t *all_objs, events_t *events,
 fps_t *fps)
 {
-    if (events->left && all_objs->perso.pos.x != 50)
+    if (events->left && all_objs->perso.pos.x >= 50)
         all_objs->perso.pos.x -= 2 * all_objs->factor_fps *
         sqrt(all_objs->factor_fps);
-    if (events->right && all_objs->perso.pos.x != 1850)
+    if (events->right && all_objs->perso.pos.x <= 1850)
         all_objs->perso.pos.x += 2 * all_objs->factor_fps *
         sqrt(all_objs->factor_fps);
-    if (events->up && all_objs->perso.pos.y >= 899) {
+    if (events->up && all_objs->perso.pos.y >= 900) {
         all_objs->perso.inc_pos = -3 * all_objs->factor_fps *
         sqrt(all_objs->factor_fps);
         all_objs->perso.rect.left = 5940 + 1246;

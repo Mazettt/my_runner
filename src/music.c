@@ -30,7 +30,7 @@ bool test_title)
 
 void play_jump_sound(all_objects_t *all_objs)
 {
-    if (all_objs->perso.pos.y <= 900)
+    if (all_objs->perso.pos.y <= 899)
         sfMusic_setVolume(all_objs->jump_music, 10);
     else
         sfMusic_setVolume(all_objs->jump_music, 0);
