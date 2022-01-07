@@ -14,7 +14,8 @@ scoreboard_t *score)
 {
     if (sfKeyEscape == event.key.code)
         score->title = 1;
-    if (sfKeySpace == event.key.code || sfKeyUp == event.key.code)
+    if (sfKeySpace == event.key.code || sfKeyUp == event.key.code ||
+    sfKeyZ == event.key.code)
         all_events->up = 1;
     if (sfKeyLeft == event.key.code || sfKeyQ == event.key.code)
         all_events->left = 1;
@@ -24,7 +25,8 @@ scoreboard_t *score)
 
 void events_key_released(sfEvent event, events_t *all_events)
 {
-    if (sfKeySpace == event.key.code || sfKeyUp == event.key.code)
+    if (sfKeySpace == event.key.code || sfKeyUp == event.key.code ||
+    sfKeyZ == event.key.code)
         all_events->up = 0;
     else if (sfKeyLeft == event.key.code || sfKeyQ == event.key.code)
         all_events->left = 0;

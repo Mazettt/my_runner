@@ -71,7 +71,7 @@ all_objects_t *all_objs);
 // music
 void play_music(all_objects_t *all_objs, scoreboard_t *score, bool test_died,
 bool test_title);
-sfMusic *set_music(char *filepath);
+sfMusic *set_music(char *filepath, sfBool loop);
 void play_jump_sound(all_objects_t *all_objs);
 
 // events

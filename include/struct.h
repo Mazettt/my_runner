@@ -26,6 +26,9 @@
     #define NBR_OBSTACLES 8
     #define NBR_SCREENS 3
     #define NBR_OBJ 7
+    #define VOLUME_MUSIC 10
+    #define VOLUME_DIED 60
+    #define VOLUME_JUMP 10
 
 typedef struct beginning_s {
     sfVideoMode mode;
