@@ -20,11 +20,17 @@ void increment_score(scoreboard_t *score, all_objects_t *all_objs)
 {
     float time = sfClock_getElapsedTime(score->clock).microseconds;
 
-    if (!score->title && !score->died && !score->won && time >= 100000) {
+    if (!score->title && !score->died && !score->won && all_objs->inf &&
+    time >= 100000) {
         score->score += 1;
         sfClock_restart(score->clock);
-    }
-    all_objs->i >= all_objs->size_map + 15 ? score->won = 1 : 0;
+    } else if (!score->title && !score->died && !score->won && !all_objs->inf &&
+    time >= 100000)
+        score->score = all_objs->i;
+    if (score->score > score->highest_score)
+        score->highest_score = score->score;
+    !all_objs->inf && all_objs->i >= all_objs->size_map + 15 ?
+    score->won = 1 : 0;
 }
 
 void draw_sprites(beginning_t *begin, all_objects_t *all_objs,

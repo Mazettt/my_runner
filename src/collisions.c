@@ -37,8 +37,6 @@ scoreboard_t *score, sfFloatRect *panda_rocher)
         sfFalse);
         sfSprite_setTextureRect(all_objs->screens[0].sprite,
         all_objs->screens[0].rect);
-        if (score->score > score->highest_score)
-            score->highest_score = score->score;
         sfMusic_destroy(music);
         return (1);
     }

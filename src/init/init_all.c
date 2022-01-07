@@ -55,7 +55,7 @@ events_t *events, scoreboard_t *score)
 void init_all(beginning_t *begin, all_objects_t *all_objs, events_t *events,
 scoreboard_t *score)
 {
-    score->highest_score = get_backup();
+    score->highest_score = get_backup(all_objs->inf);
     all_objs->i = 0;
     create_sprites(begin, all_objs, events, score);
     init_events(events);

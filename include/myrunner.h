@@ -84,7 +84,7 @@ void events_key_pressed(sfEvent event, beginning_t *begin, events_t *all_events,
 scoreboard_t *score);
 
 // backup
-int get_backup(void);
-void put_backup(int nbr);
+int get_backup(bool inf);
+void put_backup(int nbr, bool inf);
 
 #endif

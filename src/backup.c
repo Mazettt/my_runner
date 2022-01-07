@@ -20,10 +20,11 @@ int get_nbr_custom(char *buff)
     return (result);
 }
 
-int get_backup(void)
+int get_backup(bool inf)
 {
     char buffer[11];
-    int fd = open("highest.json", O_RDONLY);
+    int fd = inf ? open("highest_inf.json", O_RDONLY) :
+    open("highest_map.json", O_RDONLY);
     int r = read(fd, buffer, 11);
     int nbr = get_nbr_custom(buffer);
 
@@ -31,9 +32,10 @@ int get_backup(void)
     return (nbr);
 }
 
-void put_backup(int nbr)
+void put_backup(int nbr, bool inf)
 {
-    int fd = open("highest.json", O_WRONLY);
+    int fd = inf ? open("highest_inf.json", O_WRONLY) :
+    open("highest_map.json", O_WRONLY);
     char *buff;
     int nbr2 = nbr;
     int i = 0;

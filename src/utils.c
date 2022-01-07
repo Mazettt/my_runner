@@ -32,5 +32,5 @@ all_objects_t *all_objs)
     sfRenderWindow_destroy(begin->window);
     sfMusic_destroy(all_objs->music);
     sfMusic_destroy(all_objs->jump_music);
-    put_backup(score->highest_score);
+    put_backup(score->highest_score, all_objs->inf);
 }
