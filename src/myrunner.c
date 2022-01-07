@@ -20,7 +20,8 @@ int myrunner(bool inf, char *filepath)
     all_t all_structs;
     beginning_t begin;
 
-    all_structs.all_objs.music = set_music("music/BattleAgainstaTrueHero.ogg", sfTrue);
+    all_structs.all_objs.music = set_music("music/BattleAgainstaTrueHero.ogg",
+    sfTrue);
     all_structs.all_objs.jump_music = set_music("music/jump.ogg", sfTrue);
     infini(inf, &all_structs.all_objs, filepath);
     create_clocks(&all_structs.all_objs, &all_structs.score, &all_structs.fps);
