@@ -24,7 +24,7 @@ void increment_score(scoreboard_t *score, all_objects_t *all_objs)
         score->score += 1;
         sfClock_restart(score->clock);
     }
-    all_objs->i >= all_objs->size_map + 20 ? score->won = 1 : 0;
+    all_objs->i >= all_objs->size_map + 15 ? score->won = 1 : 0;
 }
 
 void draw_sprites(beginning_t *begin, all_objects_t *all_objs,
