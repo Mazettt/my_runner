@@ -22,11 +22,11 @@ int get_nbr_custom(char *buff)
 
 int get_backup(bool inf)
 {
-    char buffer[11];
+    char buff[11];
     int fd = inf ? open("highest_inf.json", O_RDONLY) :
     open("highest_map.json", O_RDONLY);
-    int r = read(fd, buffer, 11);
-    int nbr = get_nbr_custom(buffer);
+    int r = read(fd, buff, 11);
+    int nbr = get_nbr_custom(buff);
 
     close(fd);
     return (nbr);
