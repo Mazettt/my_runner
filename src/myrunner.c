@@ -20,7 +20,7 @@ int myrunner(bool inf, char *filepath)
     all_t all_structs;
     beginning_t begin;
 
-    all_structs.all_objs.music = set_music("music/KaminoKotoba.ogg",
+    all_structs.all_objs.music = set_music("music/A_CYBER'S_WORLD.ogg",
     sfTrue);
     all_structs.all_objs.jump_music = set_music("music/jump.ogg", sfTrue);
     infini(inf, &all_structs.all_objs, filepath);
