@@ -6,13 +6,14 @@ Runner game with CSFML
 
 ## Requirements
 
-- CSFLM library
+- SFML and CSFML
 - Make
+- GCC
 
 ## Install
 
 ```sh
-git clone git@github.com:Mazettt/my_runner.git ; cd my_runner ; make
+git clone git@github.com:Mazettt/my_runner.git && cd my_runner && make
 ```
 
 ## Usage
